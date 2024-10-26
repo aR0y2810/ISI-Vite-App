@@ -4,6 +4,7 @@ import './dashboard.css';
 const Dashboard = () => {
     const navigate = useNavigate();
     const handleLogout = () => {
+        localStorage.removeItem('authToken');
         navigate('/');
     };
     return (
@@ -27,5 +28,4 @@ const Dashboard = () => {
         </div>
     );
 };
-
 export default Dashboard;

@@ -7,8 +7,9 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false); // State for password visibility
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const navigate = useNavigate();
+    const [token, setToken] = useState(''); // State variable to store the token
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -17,23 +18,25 @@ const Login = () => {
             return;
         }
         try {
-            const response = await axios.get(`http://152.67.176.72:8081/userauth?username=${username}&password=${password}`);
-            
-            if (response.data["auth"] === true) {
+            const response = await axios.get(`http://152.67.176.72:8081/userauth?username=${username}&password=${password}`);            
+            if (response.status == 200) {
+                const token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0dTEiLCJleHAiOjE3MzAwMzA2NjV9.VRDAWymtc9TvkpyaV8esyFIaWJJ-_ob9ftQXwRt93cQ;
+                setToken(token);
+                localStorage.setItem('authToken', token);
                 navigate('/dashboard');
-            } else {
+            } 
+            else {
                 setErrorMessage('Invalid username or password');
             }
-        } catch (err) {
+        } 
+        catch (err) {
             console.error(err);
             setErrorMessage('An error occurred while trying to log in');
         }
     };
-
     const togglePasswordVisibility = () => {
         setIsPasswordVisible(!isPasswordVisible);
     };
-
     return (
         <div className="login-container">
             <h2>User Login</h2>
@@ -53,7 +56,7 @@ const Login = () => {
                         Password:
                         <div style={{ position: 'relative' }}>
                             <input 
-                                type={isPasswordVisible ? 'text' : 'password'} // Toggle between text and password
+                                type={isPasswordVisible ? 'text' : 'password'}
                                 value={password} 
                                 onChange={(e) => setPassword(e.target.value)} 
                             />
@@ -61,7 +64,7 @@ const Login = () => {
                                 onClick={togglePasswordVisibility} 
                                 style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer' }}
                             >
-                                {isPasswordVisible ? '👁️' : '👁️‍🗨️'} {/* Eye icon */}
+                                {isPasswordVisible ? '👁️' : '👁️‍🗨️'}
                             </span>
                         </div>
                     </label>
@@ -77,5 +80,4 @@ const Login = () => {
         </div>
     );
 };
-
 export default Login;

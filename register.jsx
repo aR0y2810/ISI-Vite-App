@@ -7,13 +7,13 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [email, setEmail] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [image, setImage] = useState(null);
     const navigate = useNavigate();
-
     const handleRegister = async (e) => {
         e.preventDefault();
-        if (!username || !password || !confirmPassword) {
+        if (!username || !password || !confirmPassword || !email) {
             setErrorMessage('All fields are required.');
             return;
         }
@@ -28,6 +28,7 @@ const Register = () => {
         const formData = new FormData();
         formData.append('username', username);
         formData.append('password', password);
+        formData.append('email', email);
         formData.append('image', image);
         try {
             const response = await axios.post('http://152.67.176.72:8081/register', formData, {
@@ -35,10 +36,10 @@ const Register = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
-            if (response.data.success) {
+            if (response.status==200) {
                 navigate('/login');
-            } else {
+            } 
+            else {
                 setErrorMessage(response.data.message || 'Registration failed');
             }
         } catch (err) {
@@ -53,7 +54,7 @@ const Register = () => {
         }
     };
     return (
-        <div className="register-container">
+        <div className="register">
             <h2>User Registration</h2>
             <form onSubmit={handleRegister}>
                 <div>
@@ -83,6 +84,16 @@ const Register = () => {
                             type="password" 
                             value={confirmPassword} 
                             onChange={(e) => setConfirmPassword(e.target.value)} 
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Email:
+                        <input 
+                            type="email" 
+                            value={email} 
+                            onChange={(e) => setEmail(e.target.value)} 
                         />
                     </label>
                 </div>

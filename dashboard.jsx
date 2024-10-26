@@ -16,13 +16,12 @@ const Dashboard = () => {
                 <aside className="sidebar">
                     <h3>Menu</h3>
                     <ul>
-                        <li className="menuItem" onClick={() => navigate('/dashboard')}>
-                            Dashboard
-                        </li>
+                        <button className="item1" onClick={() => navigate('/dashboard')}>Dashboard</button>
+                        <button className="item2" onClick={() => navigate('/users')}>Manage Users</button>
                     </ul>
                 </aside>
-                <div className="content">
-                    <h2>Welcome to Dashboard! Filler content test test test</h2>
+                <div className="main-content">
+                    <h2>Welcome Filler content test test test</h2>
                 </div>
             </div>
         </div>

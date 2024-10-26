@@ -1,49 +1,36 @@
 body {
-    background-image: url('C:/Users/aarus/login_app/src/assets/bg_black.avif'); 
-    background-size: cover; 
-    background-position: center; 
+    background-image: url('C:/Users/aarus/login_app/src/assets/bg_black.avif');
+    background-position: center;
+    background-repeat: no-repeat;
     color: #E0E0E0;
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
 }
-.login-container {
+.register-container {
     background-color: rgba(40, 40, 40, 0.8);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
     width: 400px;
-    box-sizing: border-box;
+    margin: auto;
 }
 h2 {
     text-align: center;
-    color: #6200EE;
+    color: #FFFFFF;
 }
 input[type="text"],
 input[type="password"] {
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); 
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
     border: 1px solid #444;
     border-radius: 4px;
     background-color: #333;
-    color: #E0E0E0; 
+    color: #E0E0E0;
 }
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #6200EE; 
-    outline: none; 
-}
-span {
-    position: absolute;
-    right: 1px;
-    top: 1px; 
-    bottom: 1px;
-    cursor: pointer;
+    border-color: #6200EE;
+    outline: none;
 }
 p {
     color: #FF5252;
@@ -54,25 +41,25 @@ p {
 button {
     width: 100px;
     padding: 10px;
-    background-color: #6200EE; 
-    color: white; 
-    border: none; 
+    background-color: #6200EE;
+    color: white;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 button:hover {
     background-color: #3700B3;
 }
-.register-link {
+.login-link {
     margin-top: 20px;
     text-align: center;
 }
-.register-link p {
-    color: #ff1616;
+.login-link p {
+    color: #E0E0E0; 
 }
-.register-link a {
+.login-link a {
     color: #6200EE; 
 }
-.register-link a:hover {
-    text-decoration: underline; 
+.login-link a:hover {
+    text-decoration: underline;
 }

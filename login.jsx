@@ -82,7 +82,7 @@ const Login = () => {
                 </div>
             </form>
             <div className="register-link" style={{ marginTop: '20px', textAlign: 'center' }}>
-                <p>Don't have an account? <a href="/register" style={{ color: '#6200EE', textDecoration: 'underline' }}>Register here</a></p>
+                <p>Don't have an account? <href onClick={() => navigate('/register')} style={{ color: '#6200EE', textDecoration: 'underline' }}>Register here</href></p>
             </div>
         </div>
     );

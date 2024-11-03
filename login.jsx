@@ -18,9 +18,16 @@ const Login = () => {
             return;
         }
         try {
-            const response = await axios.get(`http://152.67.176.72:8081/userauth?username=${username}&password=${password}`);            
-            if (response.status == 200) {
-                const token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0dTEiLCJleHAiOjE3MzAwMzA2NjV9.VRDAWymtc9TvkpyaV8esyFIaWJJ-_ob9ftQXwRt93cQ;
+            const response = await axios.post(
+                `http://152.67.176.72:8081/token`,
+                { username: username.trim(), password: password },
+                { 
+                  headers: { "Content-Type": 'application/x-www-form-urlencoded' },
+                  timeout: 10000 // 10 second timeout
+                }
+              );
+              if (response.status === 200 && response.data.token_type === "bearer") {
+                const token = response.data.access_token;
                 setToken(token);
                 localStorage.setItem('authToken', token);
                 navigate('/dashboard');

@@ -1,109 +1,95 @@
-body {
-    background-image: url('C:/Users/aarus/login_app/src/assets/bg_black.avif');
-    background-size: cover;
-    background-position: center;
-    color: #E0E0E0; 
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 10px;
-}
+/* Update the container to remove the height limit */
 .container {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
 }
-.navbar {
-    background-color: rgba(40, 40, 40, 0.8); 
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 30px; 
-}
-.title {
-    color: #6200EE;
-}
-.logoutButton {
-    background-color: #6200EE;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-.logoutButton:hover {
-    background-color: #3700B3;
-}
+
+/* Update the content to use proper flex layout */
 .content {
     display: flex;
-    flex-grow: 1;
-    align-items: left;
+    flex: 1;
+    height: calc(100vh - 60px); /* Subtract navbar height */
+    overflow: hidden; /* Prevent scrolling on the container level */
 }
+
+/* Update the sidebar to be full height */
 .sidebar {
     background-color: rgba(40, 40, 40, 0.8);
     padding: 20px;
     width: 200px;
-    border-radius: 30px; 
+    border-radius: 30px 0 0 30px; /* Remove right side border radius */
     margin-top: 10px;
-    margin-right: 10px;
+    margin-right: 0; /* Remove right margin */
+    height: calc(100% - 20px); /* Account for the top margin */
+    overflow-y: auto; /* Add scroll if content is too long */
 }
-.sidebar h3 {
-    color: #6200EE;
-}
-.sidebar ul {
-    list-style-type: none;
-    padding: 0;
-}
-.sidebar button {
-    background-color: transparent; 
-    color: #E0E0E0;
-    border: none;
+
+/* Update the main-content to use remaining space properly */
+.main-content {
+    flex: 1;
     padding: 10px;
-    width: 100%;
-    text-align: left;
+    height: 100%;
+    overflow-y: auto; /* Allow scrolling for table content */
 }
-.sidebar button:hover {
-    background-color: rgba(98, 0, 238, 0.2);
-}
+
+/* Update the user-table to use available space */
 .user-table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 10px;
 }
-.user-table th, .user-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #444; 
+.tableTitle {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 30px;
+    background-color: rgba(40, 40, 40, 0.8);
+    margin-bottom: 10px;
+}
+.addButton {
+    background-color: #6200EE;
 }
 .user-table th {
+    border: 1px solid #444;
+    padding: 12px;
+    text-align: center;
     background-color: rgba(40, 40, 40, 0.8);
-    color: #6200EE;
+    color: #E0E0E0;
 }
-.main-content h2 {
-    color: #FFFFFF; 
-    padding: 10px;
-    margin-left: 10px;
+.user-table td {
+    border: 1px solid #444;
+    padding: 12px;
+    text-align: center;
+    background-color: rgba(40, 40, 40, 0.5);
 }
-.editButton {
-    background-color: #ffe100;
-    color: white; 
-    border-radius: 4px; 
-    border:none; 
-    padding: 5px 10px; 
+.user-table td:last-child {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
-.editButton:hover {
-   background-color: #e0c200;
+.text-blue-500, .text-green-500, .text-red-500 {
+    padding: 6px 12px;
+    border-radius: 4px;
+    min-width: 70px;
 }
-.deleteButton {
-   background-color: #FF4500;
-   color:white; 
-   border-radius:4px; 
-   border:none; 
-   padding:5px 10px; 
+.text-blue-500 {
+    background-color: rgba(59, 130, 246);
 }
-.deleteButton:hover {
-   background-color:#FF0000;
+.text-green-500 {
+    background-color: rgba(34, 197, 94);
+}
+.text-red-500 {
+    background-color: rgba(239, 68, 68);
+}
+.text-blue-500:hover {
+    background-color: rgb(44, 72, 117);
+}
+.text-green-500:hover {
+    background-color: rgb(18, 108, 51);
+}
+.text-red-500:hover {
+    background-color: rgb(122, 30, 30)
 }

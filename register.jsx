@@ -8,9 +8,28 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
     const [image, setImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 1024 * 1024) { // 1MB limit
+                setErrorMessage('Image size should be less than 1MB');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImage(reader.result);
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     const handleRegister = async (e) => {
         e.preventDefault();
         if (!username || !password || !confirmPassword || !email) {
@@ -21,25 +40,22 @@ const Register = () => {
             setErrorMessage('Passwords do not match.');
             return;
         }
-        if (image && image.size > 500 * 1024) {
-            setErrorMessage('Image size should be less than 500 KB.');
-            return;
-        }
-        const formData = new FormData();
-        formData.append('username', username);
-        formData.append('password', password);
-        formData.append('email', email);
-        formData.append('image', image);
+
         try {
-            const response = await axios.post('http://152.67.176.72:8081/register', formData, {
+            const response = await axios.post('http://152.67.176.72:8081/register', {
+                username: username,
+                email: email,
+                password: password,
+                image_base64: image ? image.split(',')[1] : null // Remove the data:image/jpeg;base64, prefix
+            }, {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            if (response.status==200) {
-                navigate('/login');
-            } 
-            else {
+                    "Content-Type": "application/json",
+                }
+            }); 
+
+            if (response.status === 201) {
+                navigate('/');
+            } else {
                 setErrorMessage(response.data.message || 'Registration failed');
             }
         } catch (err) {
@@ -47,12 +63,7 @@ const Register = () => {
             setErrorMessage('An error occurred while trying to register');
         }
     };
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setImage(file);
-        }
-    };
+
     return (
         <div className="register">
             <h2>User Registration</h2>
@@ -99,14 +110,23 @@ const Register = () => {
                 </div>
                 <div>
                     <label>
-                        Upload Image (optional):
+                        Profile Image:
                         <input 
                             type="file" 
-                            accept="image/*" 
-                            onChange={handleImageChange} 
+                            accept="image/*"
+                            onChange={handleImageChange}
                         />
                     </label>
                 </div>
+                {imagePreview && (
+                    <div className="image-preview">
+                        <img 
+                            src={imagePreview} 
+                            alt="Preview" 
+                            style={{ maxWidth: '200px', marginTop: '10px' }}
+                        />
+                    </div>
+                )}
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
                 <div className="button-container">
                     <button type="submit">Register</button>

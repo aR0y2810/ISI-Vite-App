@@ -29,7 +29,7 @@ body {
     color: #6200EE;
 }
 .logoutButton {
-    background-color: #6200EE;
+    background-color: #FF4500;
     color: white;
     border: none;
     border-radius: 4px;
@@ -37,7 +37,7 @@ body {
     cursor: pointer;
 }
 .logoutButton:hover {
-    background-color: #3700B3;
+    background-color: #7e2200;
 }
 .content {
     display: flex;
@@ -55,8 +55,8 @@ body {
     color: #6200EE;
 }
 .sidebar ul {
-    list-style-type: none; /* Remove bullet points from list */
-    padding: 0; /* Remove default padding from list */
+    list-style-type: none;
+    padding: 0;
 }
 
 .sidebar button {
